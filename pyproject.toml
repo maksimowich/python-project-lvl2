@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Alexander Maksimovich"]
 packages = [
-    { include = "hexlet_code/gendiff" },
+    { include = "gendiff" }
 ]
 
 
@@ -21,4 +21,4 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry.scripts]
-gendiff = "hexlet_code.gendiff.__init__:main"
+gendiff = "gendiff.scripts.gendiff:main"
