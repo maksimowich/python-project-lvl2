@@ -34,4 +34,7 @@ def generate_diff(file1, file2):
             result_string += f'\n  + {key}: {f2[key]}'
     result_string += '\n}'
 
+    result_string = result_string.replace("True", "true")
+    result_string = result_string.replace("False", "false")
+
     return result_string
