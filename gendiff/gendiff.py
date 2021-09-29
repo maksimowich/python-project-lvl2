@@ -1,27 +1,13 @@
-from gendiff.parsing import parsing
-from gendiff.make_dicts import make_dicts
+from gendiff.get_diff_structure import get_diff_structure
+from gendiff.get_dicts_from_files import get_dicts_from_files
+from gendiff.formaters.stylish import stylish
 
 
-def generate_diff(file1, file2):
-    dict_f1, dict_f2 = make_dicts(file1, file2)
+def generate_diff(file1, file2, _format="stylish"):
 
-    added_keys, deleted_keys, unmodified_keys, \
-        modified_keys, sorted_list_of_keys = parsing(dict_f1, dict_f2)
+    dict_f1, dict_f2 = get_dicts_from_files(file1, file2)
 
-    result_string = '{'
-    for key in sorted_list_of_keys:
-        if key in added_keys:
-            result_string += f'\n  + {key}: {dict_f2[key]}'
-        elif key in deleted_keys:
-            result_string += f'\n  - {key}: {dict_f1[key]}'
-        elif key in unmodified_keys:
-            result_string += f'\n    {key}: {dict_f1[key]}'
-        elif key in modified_keys:
-            result_string += f'\n  - {key}: {dict_f1[key]}'
-            result_string += f'\n  + {key}: {dict_f2[key]}'
-    result_string += '\n}'
+    diff = get_diff_structure(dict_f1, dict_f2)
 
-    result_string = result_string.replace("True", "true")
-    result_string = result_string.replace("False", "false")
-
-    return result_string
+    if _format == "stylish":
+        return stylish(diff)
