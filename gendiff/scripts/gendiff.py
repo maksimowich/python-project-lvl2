@@ -11,5 +11,4 @@ parser.add_argument('-f', '--format', nargs='?', default='stylish')
 
 def main():
     args = parser.parse_args()
-    print(parser.parse_args())
     print(generate_diff(args.first_file, args.second_file, args.format))

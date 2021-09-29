@@ -1,6 +1,7 @@
 from gendiff.get_diff_structure import get_diff_structure
 from gendiff.get_dicts_from_files import get_dicts_from_files
 from gendiff.formaters.stylish import stylish
+from gendiff.formaters.plain import plain
 
 
 def generate_diff(file1, file2, _format="stylish"):
@@ -11,3 +12,6 @@ def generate_diff(file1, file2, _format="stylish"):
 
     if _format == "stylish":
         return stylish(diff)
+    
+    elif _format == "plain":
+        return plain(diff)
