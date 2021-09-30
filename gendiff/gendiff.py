@@ -7,15 +7,16 @@ from gendiff.make_format_changes import get_format_changed
 
 
 def generate_diff(file1, file2, _format="stylish"):
-    dict_f1 = get_format_changed(get_dict_from_file(file1))
-    dict_f2 = get_format_changed(get_dict_from_file(file2))
-    diff = get_diff_structure(dict_f1, dict_f2)
-
-    if _format == "stylish":
-        return stylish(diff)
-
-    elif _format == "plain":
-        return plain(diff)
-
+    if _format in {"stylish", "plain"}:
+        dict_f1 = get_format_changed(get_dict_from_file(file1))
+        dict_f2 = get_format_changed(get_dict_from_file(file2))
+        diff = get_diff_structure(dict_f1, dict_f2)
+        if _format == "stylish":
+            return stylish(diff)
+        elif _format == "plain":
+            return plain(diff)[:-1]
     elif _format == "json":
-        print(diff)
+        dict_f1 = get_dict_from_file(file1)
+        dict_f2 = get_dict_from_file(file2)
+        diff = get_diff_structure(dict_f1, dict_f2)
+        return get_json(diff)

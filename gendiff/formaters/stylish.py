@@ -37,4 +37,4 @@ def stylish(diff):
                 result_str += get_str_of_deleted_or_added(value[1][1], level)
         result_str += level * "    " + "}\n"
         return result_str
-    return walk(diff)
+    return walk(diff)[:-1]
